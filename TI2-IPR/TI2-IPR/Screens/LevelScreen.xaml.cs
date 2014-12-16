@@ -28,6 +28,11 @@ namespace TI2_IPR
             this.InitializeComponent();
         }
 
+        public void Load()
+        {
+
+        }
+
         /// <summary>
         /// Invoked when this page is about to be displayed in a Frame.
         /// </summary>
