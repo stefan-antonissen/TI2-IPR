@@ -36,11 +36,6 @@ namespace TI2_IPR
         {
         }
 
-        private void helpButton(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(MainPage));
-        }
-
         private void oneButton_Click(object sender, RoutedEventArgs e)
         {
 
@@ -69,6 +64,11 @@ namespace TI2_IPR
         private void sixButton_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void helpButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MainPage));
         }
     }
 }
