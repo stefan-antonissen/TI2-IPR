@@ -9,6 +9,11 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-
+        <TextBlock Margin="106,34,106,0" TextWrapping="Wrap" Text="Welkom" VerticalAlignment="Top" Height="58" Width="130" FontSize="36"/>
+        <TextBlock Margin="10,109,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="521" Width="380" FontSize="36" HorizontalAlignment="Left">
+            <Run FontSize="24" Text="In dit spel moet je door middel van GPS een doolhof oplossen. Hierbij moet je dus zelf het doolhof lopen."/>
+        	<LineBreak/>
+        	<Run/>
+        </TextBlock>
     </Grid>
 </Page>
