@@ -15,6 +15,6 @@
         	<LineBreak/>
         	<Run/>
         </TextBlock>
-        <Button x:Name="startButton" Content="Begin" HorizontalAlignment="Stretch" Margin="45,500,45,0" VerticalAlignment="Top" Click="startButton_Click"/>
+        <Button x:Name="startButton" Content="Begin" HorizontalAlignment="Stretch" Margin="45,550,45,0" VerticalAlignment="Top" Click="startButton_Click"/>
     </Grid>
 </Page>

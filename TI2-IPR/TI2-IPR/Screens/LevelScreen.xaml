@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="TI2_IPR.levelScreen"
+    x:Class="TI2_IPR.LevelScreen"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:TI2_IPR"
@@ -16,6 +16,6 @@
         <Button x:Name="fourButton" Content="4" HorizontalAlignment="Stretch" Margin="25,175,265,0" VerticalAlignment="Top" Click="fourButton_Click"/>
         <Button x:Name="fiveButton" Content="5" HorizontalAlignment="Stretch" Margin="145,175,145,0" VerticalAlignment="Top" Click="fiveButton_Click"/>
         <Button x:Name="sixButton" Content="6" HorizontalAlignment="Stretch" Margin="265,175,25,0" VerticalAlignment="Top" Click="sixButton_Click"/>
-        <Button x:Name="helpButton" Content="Help" HorizontalAlignment="Stretch" Margin="45,500,45,0" VerticalAlignment="Top" Click="helpButton_Click"/>
+        <Button x:Name="helpButton" Content="Help" HorizontalAlignment="Stretch" Margin="45,550,45,0" VerticalAlignment="Top" Click="helpButton_Click"/>
     </Grid>
 </Page>

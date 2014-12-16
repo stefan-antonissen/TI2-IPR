@@ -1,0 +1,17 @@
+﻿<Page
+    x:Class="TI2_IPR.Screens.GameScreen"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TI2_IPR.Screens"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <TextBlock Margin="90,34,90,0" TextWrapping="Wrap" Text="Level" VerticalAlignment="Top" Height="58" Width="120" FontSize="36"/>
+        <Button x:Name="backButton" Content="Terug" HorizontalAlignment="Stretch" Margin="45,550,45,0" VerticalAlignment="Top" Click="helpButton_Click"/>
+        <Maps:MapControl x:Name="mapControl" Height="425" Margin="25,80,25,100" />
+    </Grid>
+</Page>
