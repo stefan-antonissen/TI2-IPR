@@ -13,7 +13,7 @@ namespace TI2_IPR
 {
     class Ball
     {
-        private Gyrometer _Gyrometer;
+        private Accelerometer _accelerometer;
         private double _currentX;
         private double _currentY;
         private double _MinY;
@@ -21,7 +21,24 @@ namespace TI2_IPR
         private double _MaxX;
         private double _MaxY;
 
-        public Ball(double x, double y, double sizeX, double sizeY,double distanceTop, double distanceLeft)
+        //public Ball()
+        //{
+        //    double x = 0;
+        //    double y = 0;
+        //    double sizeX = 50;
+        //    double sizeY = 50;
+        //    double distanceTop = 0;
+        //    double distanceLeft = 0;
+        //    _currentX = x;
+        //    _currentY = y;
+        //    _MinX = distanceTop;
+        //    _MinY = distanceLeft;
+        //    _MaxX = 1000;
+        //    _MaxY = 500;
+        //    newLocation();
+        //}
+
+        public Ball(double x, double y, double sizeX, double sizeY, double distanceTop, double distanceLeft)
         {
             _currentX = x;
             _currentY = y;
@@ -34,24 +51,26 @@ namespace TI2_IPR
 
         public void newLocation()
         {
-            _Gyrometer = Gyrometer.GetDefault();
+            _accelerometer = Accelerometer.GetDefault();
          
-            _Gyrometer.ReportInterval = _Gyrometer.MinimumReportInterval;
-            _Gyrometer.ReadingChanged += ReadingChanged;
+            _accelerometer.ReportInterval = _accelerometer.MinimumReportInterval;
+            _accelerometer.ReadingChanged += ReadingChanged;
         }
 
 
 
-        private async void ReadingChanged(Gyrometer sender, GyrometerReadingChangedEventArgs args)
+        private async void ReadingChanged(Accelerometer sender, AccelerometerReadingChangedEventArgs args)
         {
 
-            _currentX += args.Reading.AngularVelocityX * 5;
+            _currentX += args.Reading.AccelerationX * 5;
             if (_currentX < _MinX) _currentX = _MinX;
             if (_currentX > _MaxX) _currentX = _MaxX;
 
-            _currentY += -args.Reading.AngularVelocityY * 5;
+            _currentY += -args.Reading.AccelerationY * 5;
             if (_currentY < _MinY) _currentY = _MinY;
             if (_currentY > _MaxY) _currentY = _MaxY;
+
+
         }
 
         public double getLocationX()

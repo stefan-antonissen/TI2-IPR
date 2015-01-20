@@ -15,6 +15,10 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Controls.Maps;
 using Windows.UI.Core;
+using System.Linq;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -25,17 +29,25 @@ namespace TI2_IPR.Screens
     /// </summary>
     public sealed partial class GameScreen : Page
     {
-        private Gyrometer _Gyrometer;
+        private Accelerometer _accelerometer;
         private Ball ball;
+        private List<Object> obstacles;
+        private double oldX;
+        private double oldY;
+
         public GameScreen()
         {
             this.InitializeComponent();
             Canvas.GetLeft(ell1);
             UpdateLayout();
-            ball = new Ball(Canvas.GetLeft(ell1), Canvas.GetTop(ell1), this.ActualWidth, this.ActualHeight, this.Margin.Top, this.Margin.Left);
-            _Gyrometer = Gyrometer.GetDefault();
-            _Gyrometer.ReportInterval = _Gyrometer.MinimumReportInterval;
-            _Gyrometer.ReadingChanged += OnGyrometerReading;
+
+            //obstacles.Add("obstakel");
+
+            ball = new Ball(Canvas.GetLeft(ell1), Canvas.GetTop(ell1),350 , 475, this.Margin.Top, this.Margin.Left);
+            _accelerometer = Accelerometer.GetDefault();
+            _accelerometer.ReportInterval = _accelerometer.MinimumReportInterval;
+            _accelerometer.ReadingChanged += OnAccelerometerReading;
+            this.DataContext = this;
         }
 
         /// <summary>
@@ -52,16 +64,26 @@ namespace TI2_IPR.Screens
             Frame.Navigate(typeof(LevelScreen));
         }
 
-        private async void OnGyrometerReading(Gyrometer sender, GyrometerReadingChangedEventArgs args)
+        private async void OnAccelerometerReading(Accelerometer sender, AccelerometerReadingChangedEventArgs args)
         {
-                double currentX = ball.getLocationX();
-                double currentY = ball.getLocationY();
+            Boolean setX = false;
+            Boolean setY = false;
 
+            double currentX = ball.getLocationX();
+            double currentY = ball.getLocationY();
+            
+            //for (int i = 0; i < obstacles.Count; i++ )
+            //{
+            //}
+            
             await this.Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
             {
                 Canvas.SetLeft(ell1, currentX);
                 Canvas.SetTop(ell1, currentY);
             });
+                
+            oldX = currentX;
+            oldY = currentY;
         }
 
     }
