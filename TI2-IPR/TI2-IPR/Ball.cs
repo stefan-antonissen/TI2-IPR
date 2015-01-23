@@ -21,23 +21,6 @@ namespace TI2_IPR
         private double _MaxX;
         private double _MaxY;
 
-        //public Ball()
-        //{
-        //    double x = 0;
-        //    double y = 0;
-        //    double sizeX = 50;
-        //    double sizeY = 50;
-        //    double distanceTop = 0;
-        //    double distanceLeft = 0;
-        //    _currentX = x;
-        //    _currentY = y;
-        //    _MinX = distanceTop;
-        //    _MinY = distanceLeft;
-        //    _MaxX = 1000;
-        //    _MaxY = 500;
-        //    newLocation();
-        //}
-
         public Ball(double x, double y, double sizeX, double sizeY, double distanceTop, double distanceLeft)
         {
             _currentX = x;

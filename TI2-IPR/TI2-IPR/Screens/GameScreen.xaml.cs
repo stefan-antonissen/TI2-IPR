@@ -32,6 +32,7 @@ namespace TI2_IPR.Screens
         private Accelerometer _accelerometer;
         private Ball ball;
         private List<Object> obstacles;
+        private Obstacle obstakel;
         private double oldX;
         private double oldY;
 
@@ -47,6 +48,8 @@ namespace TI2_IPR.Screens
             _accelerometer = Accelerometer.GetDefault();
             _accelerometer.ReportInterval = _accelerometer.MinimumReportInterval;
             _accelerometer.ReadingChanged += OnAccelerometerReading;
+
+            obstakel = new Obstacle(Canvas.GetLeft(obstacle1), Canvas.GetTop(obstacle1), 350, 475, this.Margin.Top, this.Margin.Left);
             this.DataContext = this;
         }
 
@@ -66,24 +69,38 @@ namespace TI2_IPR.Screens
 
         private async void OnAccelerometerReading(Accelerometer sender, AccelerometerReadingChangedEventArgs args)
         {
-            Boolean setX = false;
-            Boolean setY = false;
+            //Boolean setX = false;
+            //Boolean setY = false;
 
             double currentX = ball.getLocationX();
             double currentY = ball.getLocationY();
+            double obstakelX = obstakel.getLocationX();
+            double obstakelY = obstakel.getLocationY();
             
             //for (int i = 0; i < obstacles.Count; i++ )
             //{
             //}
-            
-            await this.Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
+
+            if (currentX <= obstakelX && currentX >= obstakel.getSizeX() /*&& currentY <= obstakelY && currentY >= obstakel.getSizeY()*/)
             {
-                Canvas.SetLeft(ell1, currentX);
-                Canvas.SetTop(ell1, currentY);
-            });
-                
-            oldX = currentX;
-            oldY = currentY;
+                await this.Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
+                {
+                    Canvas.SetLeft(ell1, currentX);
+                    oldX = currentX;
+                    //Canvas.SetTop(ell1, currentY);
+                    //oldY = currentY;
+                });
+            }
+
+            if (obstakelY <= currentY && currentY >= obstakel.getSizeY())
+            {
+                await this.Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
+                {
+                    Canvas.SetTop(ell1, currentY);
+                    oldY = currentY;
+                });
+            }
+
         }
 
     }
