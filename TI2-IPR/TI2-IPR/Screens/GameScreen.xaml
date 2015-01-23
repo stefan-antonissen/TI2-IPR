@@ -13,7 +13,7 @@
         <TextBlock Margin="159,10,158,0" TextWrapping="Wrap" Text="Level" VerticalAlignment="Top" Height="41" FontSize="36"/>
         <Button x:Name="backButton" Content="Terug" HorizontalAlignment="Stretch" Margin="45,582,45,0" VerticalAlignment="Top" Click="helpButton_Click"/>
 
-        <Canvas Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="0,56,0,56">
+        <Canvas x:Name="canvas" Margin="0,56,0,56">
             <Ellipse Fill="Gray" Width="50" Height="50" Canvas.Left="0" Canvas.Top="0" x:Name="ell1" />
             <Rectangle Fill="Yellow" Width="20" Height="100" Canvas.Left="100" Canvas.Top="100" x:Name="obstacle1" x:Uid="obstakel"/>
         </Canvas>

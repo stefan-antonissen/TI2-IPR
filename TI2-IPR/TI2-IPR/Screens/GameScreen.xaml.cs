@@ -19,6 +19,7 @@ using System.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Windows.UI.Xaml.Shapes;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -31,7 +32,7 @@ namespace TI2_IPR.Screens
     {
         private Accelerometer _accelerometer;
         private Ball ball;
-        private List<Object> obstacles;
+        private List<Rectangle> obstacles;
         private double oldX;
         private double oldY;
 
@@ -50,6 +51,14 @@ namespace TI2_IPR.Screens
             this.DataContext = this;
         }
 
+        private void addObstacles()
+        {
+            foreach (Rectangle r in obstacles)
+            {
+                this.canvas.Children.Add(r);
+            }
+        }
+
         /// <summary>
         /// Invoked when this page is about to be displayed in a Frame.
         /// </summary>
@@ -57,6 +66,9 @@ namespace TI2_IPR.Screens
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            obstacles = e.Parameter as List<Rectangle>;
+            if (obstacles != null)
+                addObstacles();
         }
 
         private void helpButton_Click(object sender, RoutedEventArgs e)

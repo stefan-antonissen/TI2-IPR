@@ -6,6 +6,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using TI2_IPR.Screens;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -13,6 +14,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Shapes;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -44,7 +46,16 @@ namespace TI2_IPR
 
         private void oneButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(GameScreen));
+            List<Rectangle> obstacles = new List<Rectangle>();
+            Rectangle obstacle1 = new Rectangle();
+            obstacle1.Width = 30;
+            obstacle1.Height = 30;
+            obstacle1.SetValue(Canvas.TopProperty, (double)300);
+            obstacle1.SetValue(Canvas.LeftProperty, (double)300);
+            obstacle1.Fill = new SolidColorBrush(Colors.Yellow);
+            obstacles.Add(obstacle1);
+
+            Frame.Navigate(typeof(GameScreen), obstacles);
         }
 
         private void twoButton_Click(object sender, RoutedEventArgs e)
