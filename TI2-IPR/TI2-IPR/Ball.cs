@@ -21,31 +21,14 @@ namespace TI2_IPR
         private double _MaxX;
         private double _MaxY;
 
-        //public Ball()
-        //{
-        //    double x = 0;
-        //    double y = 0;
-        //    double sizeX = 50;
-        //    double sizeY = 50;
-        //    double distanceTop = 0;
-        //    double distanceLeft = 0;
-        //    _currentX = x;
-        //    _currentY = y;
-        //    _MinX = distanceTop;
-        //    _MinY = distanceLeft;
-        //    _MaxX = 1000;
-        //    _MaxY = 500;
-        //    newLocation();
-        //}
-
         public Ball(double x, double y, double sizeX, double sizeY, double distanceTop, double distanceLeft)
         {
             _currentX = x;
             _currentY = y;
             _MinX = distanceTop;
             _MinY = distanceLeft;
-            _MaxX = distanceTop + sizeX;
-            _MaxY = distanceLeft + sizeY;
+            _MaxX = distanceTop + sizeY;
+            _MaxY = distanceLeft + sizeX;
             newLocation();
         }
 
@@ -59,17 +42,16 @@ namespace TI2_IPR
 
 
 
-        private async void ReadingChanged(Accelerometer sender, AccelerometerReadingChangedEventArgs args)
+        private void ReadingChanged(Accelerometer sender, AccelerometerReadingChangedEventArgs args)
         {
 
-            _currentX += args.Reading.AccelerationX * 5;
+            _currentX += args.Reading.AccelerationX * 2;
             if (_currentX < _MinX) _currentX = _MinX;
             if (_currentX > _MaxX) _currentX = _MaxX;
 
-            _currentY += -args.Reading.AccelerationY * 5;
+            _currentY += -args.Reading.AccelerationY * 2;
             if (_currentY < _MinY) _currentY = _MinY;
             if (_currentY > _MaxY) _currentY = _MaxY;
-
 
         }
 
@@ -81,6 +63,16 @@ namespace TI2_IPR
         public double getLocationY()
         {
             return _currentY;
+        }
+
+        public void setLocationX(double x)
+        {
+            _currentX = x;
+        }
+
+        public void setLocationY(double y)
+        {
+            _currentY = y;
         }
     }
 }

@@ -33,6 +33,8 @@ namespace TI2_IPR.Screens
         private Accelerometer _accelerometer;
         private Ball ball;
         private List<Rectangle> obstacles;
+        private List<Object> obstacles;
+        private Obstacle obstakel;
         private double oldX;
         private double oldY;
 
@@ -44,10 +46,12 @@ namespace TI2_IPR.Screens
 
             //obstacles.Add("obstakel");
 
-            ball = new Ball(Canvas.GetLeft(ell1), Canvas.GetTop(ell1),350 , 475, this.Margin.Top, this.Margin.Left);
+            ball = new Ball(Canvas.GetLeft(ell1), Canvas.GetTop(ell1),475 , 350, this.Margin.Top, this.Margin.Left);
             _accelerometer = Accelerometer.GetDefault();
             _accelerometer.ReportInterval = _accelerometer.MinimumReportInterval;
             _accelerometer.ReadingChanged += OnAccelerometerReading;
+
+            obstakel = new Obstacle(Canvas.GetLeft(obstacle1), Canvas.GetTop(obstacle1), 475, 350, this.Margin.Top, this.Margin.Left);
             this.DataContext = this;
         }
 
@@ -78,24 +82,64 @@ namespace TI2_IPR.Screens
 
         private async void OnAccelerometerReading(Accelerometer sender, AccelerometerReadingChangedEventArgs args)
         {
-            Boolean setX = false;
-            Boolean setY = false;
+            //Boolean setX = false;
+            //Boolean setY = false;
 
             double currentX = ball.getLocationX();
             double currentY = ball.getLocationY();
-            
+            double obstakelX = obstakel.getLocationX();
+            double obstakelY = obstakel.getLocationY();
             //for (int i = 0; i < obstacles.Count; i++ )
             //{
             //}
-            
-            await this.Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
+
+
+
+            if (currentX + 50 <= obstakelX || currentX >= obstakel.getSizeX() + obstakelX || currentY + 50 <= obstakelY || currentY >= obstakel.getSizeY() + obstakelY)/*als het op 1 plek binnnen obstakel is*/
             {
-                Canvas.SetLeft(ell1, currentX);
-                Canvas.SetTop(ell1, currentY);
-            });
-                
-            oldX = currentX;
-            oldY = currentY;
+                if (currentX + 50 >= obstakelX && currentX <= obstakel.getSizeX() && currentY + 50 >= obstakelY && currentY <= obstakel.getSizeY() + obstakelY)/*als binnen obstakel valt*/
+                {
+                    ball.setLocationX(oldX);
+                    
+                }
+                else if (currentY + 50 <= obstakelY || currentY >= obstakel.getSizeY())
+                {
+                    await this.Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
+                    {
+                        Canvas.SetLeft(ell1, currentX);
+                        oldX = currentX;
+                    });
+                }
+                else
+                {
+                    await this.Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
+                    {
+                        Canvas.SetLeft(ell1, currentX);
+                        oldX = currentX;
+                    });
+                }
+
+                if (currentY + 50 >= obstakelY && currentY <= obstakel.getSizeY() + obstakelY && (currentX + 50 >= obstakelX && currentX <= obstakel.getSizeX() + obstakelX))
+                {
+                    ball.setLocationX(oldY);
+                }
+                else if (currentX + 50 <= obstakelX || currentX >= obstakel.getSizeX()+ obstakelX)
+                {
+                    await this.Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
+                    {
+                        Canvas.SetTop(ell1, currentY);
+                        oldY = currentY;
+                    });
+                }
+                else
+                {
+                    await this.Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
+                    {
+                        Canvas.SetTop(ell1, currentY);
+                        oldY = currentY;
+                    });
+                }
+            }
         }
 
     }
