@@ -45,7 +45,10 @@ namespace MapApp
         public static MainPage _mapView = null;
         public static readonly object _padlock = new object();
         private SimpleOrientationSensor _simpleorientation = SimpleOrientationSensor.GetDefault();
+        private Boolean avans;
 
+        const double PIx = 3.141592653589793;
+        const double RADIUS = 6378.16;
         public Dictionary<string, MapIcon> _sightings { get; set; }
         private Ellipse _ellipse;
         private bool _started { get; set; }
@@ -67,7 +70,10 @@ namespace MapApp
             _mapView = this;
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
+            addToMap();
+            avans = false;
             setToCurrentLocation();
+            
         }
 
         /// <summary>
@@ -86,12 +92,63 @@ namespace MapApp
             // this event is handled for you.
         }
 
+        private void addToMap()
+        {
+            MapIcon tempMapIcon = new MapIcon();
+            tempMapIcon.Location = new Geopoint(new BasicGeoposition()
+            {
+                Latitude = 51.5856,
+                Longitude = 4.7935
+            });
+            tempMapIcon.Title = "Avans";
+            _sightings.Add(String.Format("Avans" + "{0}", "lalala"), tempMapIcon);
+            map.MapElements.Add(tempMapIcon);
+        }
+
+        public static double Radians(double x)
+        {
+            return x * PIx / 180;
+        }
+
         private async void setToCurrentLocation()
         {
             var location = await getLocationAsync();
             await map.TrySetViewAsync(location.Coordinate.Point, 18, 0, 0, MapAnimationKind.Linear);
 
             _geo.PositionChanged += new TypedEventHandler<Geolocator, PositionChangedEventArgs>(geo_PositionChanged);
+        }
+
+        private async void checkForSightings()
+        {
+            double latitude;
+            double longitude;
+            String description;
+            double distance = 0.02;
+            
+            await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+            {
+                //for (int i = 0; i < DatabaseConnection.instance.getSightings().Count; i++)
+                //{
+                    latitude = 51.5856;
+                    longitude = 4.7935;
+
+                    var location = await getLocationAsync();
+
+                    if (DistanceBetweenPlaces(longitude, latitude, location.Coordinate.Point.Position.Longitude, location.Coordinate.Point.Position.Latitude) <= distance)
+                    {
+                        description = "Je bent bij Avans!";
+                        
+                        if (avans == false)
+                        {
+                            avans = true;
+                            MessageDialog _msgbox = new MessageDialog(description);
+                            await _msgbox.ShowAsync();
+                            
+                        }
+                        
+                    }
+                //}
+            });
         }
 
         public static MainPage instance
@@ -101,6 +158,21 @@ namespace MapApp
                 return _mapView;
             }
         }
+
+        public static double DistanceBetweenPlaces(
+            double lon1,
+            double lat1,
+            double lon2,
+            double lat2)
+        {
+            double dlon = Radians(lon2 - lon1);
+            double dlat = Radians(lat2 - lat1);
+
+            double a = (Math.Sin(dlat / 2) * Math.Sin(dlat / 2)) + Math.Cos(Radians(lat1)) * Math.Cos(Radians(lat2)) * (Math.Sin(dlon / 2) * Math.Sin(dlon / 2));
+            double angle = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+            return angle * RADIUS;
+        }
+
         private async void geo_PositionChanged(Geolocator sender, PositionChangedEventArgs e)
         {
             await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
@@ -118,6 +190,7 @@ namespace MapApp
                 if (UpdateLocation_Checkbox.IsChecked == true)
                     await map.TrySetViewAsync(location.Coordinate.Point, map.ZoomLevel, 0, 0, MapAnimationKind.Linear);
             });
+            checkForSightings();
         }
 
         private async Task<Geoposition> getLocationAsync()
