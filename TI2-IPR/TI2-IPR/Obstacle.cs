@@ -13,17 +13,15 @@ namespace TI2_IPR
         private double _currentY;
         private double _MinY;
         private double _MinX;
-        private double _MaxX;
-        private double _MaxY;
+        private double _SizeX;
+        private double _SizeY;
 
         public Obstacle(double x, double y, double sizeX, double sizeY, double distanceTop, double distanceLeft)
         {
             _currentX = x;
             _currentY = y;
-            _MinX = distanceTop;
-            _MinY = distanceLeft;
-            _MaxX = distanceTop + sizeX;
-            _MaxY = distanceLeft + sizeY;
+            _SizeX = 20;
+            _SizeY = 100;
         }
 
         public double getLocationX()
@@ -38,12 +36,12 @@ namespace TI2_IPR
 
         public double getSizeX()
         {
-            return _MaxX;
+            return _SizeX;
         }
 
         public double getSizeY()
         {
-            return _MaxY;
+            return _SizeY;
         }
 
     }

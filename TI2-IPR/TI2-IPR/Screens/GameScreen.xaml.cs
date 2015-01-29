@@ -44,12 +44,12 @@ namespace TI2_IPR.Screens
 
             //obstacles.Add("obstakel");
 
-            ball = new Ball(Canvas.GetLeft(ell1), Canvas.GetTop(ell1),350 , 475, this.Margin.Top, this.Margin.Left);
+            ball = new Ball(Canvas.GetLeft(ell1), Canvas.GetTop(ell1),475 , 350, this.Margin.Top, this.Margin.Left);
             _accelerometer = Accelerometer.GetDefault();
             _accelerometer.ReportInterval = _accelerometer.MinimumReportInterval;
             _accelerometer.ReadingChanged += OnAccelerometerReading;
 
-            obstakel = new Obstacle(Canvas.GetLeft(obstacle1), Canvas.GetTop(obstacle1), 350, 475, this.Margin.Top, this.Margin.Left);
+            obstakel = new Obstacle(Canvas.GetLeft(obstacle1), Canvas.GetTop(obstacle1), 475, 350, this.Margin.Top, this.Margin.Left);
             this.DataContext = this;
         }
 
@@ -76,31 +76,70 @@ namespace TI2_IPR.Screens
             double currentY = ball.getLocationY();
             double obstakelX = obstakel.getLocationX();
             double obstakelY = obstakel.getLocationY();
-            
             //for (int i = 0; i < obstacles.Count; i++ )
             //{
             //}
 
-            if (currentX <= obstakelX && currentX >= obstakel.getSizeX() /*&& currentY <= obstakelY && currentY >= obstakel.getSizeY()*/)
+
+
+            if (currentX + 50 <= obstakelX || currentX >= obstakel.getSizeX() + obstakelX || currentY + 50 <= obstakelY || currentY >= obstakel.getSizeY() + obstakelY)/*als het op 1 plek binnnen obstakel is*/
             {
-                await this.Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
+                if (currentX + 50 >= obstakelX && currentX <= obstakel.getSizeX() && currentY + 50 >= obstakelY && currentY <= obstakel.getSizeY() + obstakelY)/*als binnen obstakel valt*/
                 {
-                    Canvas.SetLeft(ell1, currentX);
-                    oldX = currentX;
-                    //Canvas.SetTop(ell1, currentY);
-                    //oldY = currentY;
-                });
+                    ball.setLocationX(oldX);
+                    
+                }
+                else if (currentY + 50 <= obstakelY || currentY >= obstakel.getSizeY())
+                {
+                    await this.Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
+                    {
+                        Canvas.SetLeft(ell1, currentX);
+                        oldX = currentX;
+                    });
+                }
+                else
+                {
+                    await this.Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
+                    {
+                        Canvas.SetLeft(ell1, currentX);
+                        oldX = currentX;
+                    });
+                }
+
+                if (currentY + 50 >= obstakelY && currentY <= obstakel.getSizeY() + obstakelY && (currentX + 50 >= obstakelX && currentX <= obstakel.getSizeX() + obstakelX))/*als binnen obstakel valt*/
+                {
+                    ball.setLocationX(oldY);
+                }
+                else if (currentX + 50 <= obstakelX || currentX >= obstakel.getSizeX()+ obstakelX)
+                {
+                    await this.Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
+                    {
+                        Canvas.SetTop(ell1, currentY);
+                        oldY = currentY;
+                    });
+                }
+                else
+                {
+                    await this.Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
+                    {
+                        Canvas.SetTop(ell1, currentY);
+                        oldY = currentY;
+                    });
+                }
             }
 
-            if (obstakelY <= currentY && currentY >= obstakel.getSizeY())
+            /*if (currentY + 50 <= obstakelY || currentY >= obstakel.getSizeY() + obstakelY && currentX + 50 <= obstakelX || currentX >= obstakel.getSizeX() + obstakelX)
             {
                 await this.Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
                 {
                     Canvas.SetTop(ell1, currentY);
                     oldY = currentY;
-                });
+                });/*
             }
-
+            else
+            {
+                ball.setLocationY(oldY);
+            }*/
         }
 
     }
