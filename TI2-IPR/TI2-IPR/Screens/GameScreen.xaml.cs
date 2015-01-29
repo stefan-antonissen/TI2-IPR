@@ -106,7 +106,7 @@ namespace TI2_IPR.Screens
                     });
                 }
 
-                if (currentY + 50 >= obstakelY && currentY <= obstakel.getSizeY() + obstakelY && (currentX + 50 >= obstakelX && currentX <= obstakel.getSizeX() + obstakelX))/*als binnen obstakel valt*/
+                if (currentY + 50 >= obstakelY && currentY <= obstakel.getSizeY() + obstakelY && (currentX + 50 >= obstakelX && currentX <= obstakel.getSizeX() + obstakelX))
                 {
                     ball.setLocationX(oldY);
                 }
@@ -127,19 +127,6 @@ namespace TI2_IPR.Screens
                     });
                 }
             }
-
-            /*if (currentY + 50 <= obstakelY || currentY >= obstakel.getSizeY() + obstakelY && currentX + 50 <= obstakelX || currentX >= obstakel.getSizeX() + obstakelX)
-            {
-                await this.Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
-                {
-                    Canvas.SetTop(ell1, currentY);
-                    oldY = currentY;
-                });/*
-            }
-            else
-            {
-                ball.setLocationY(oldY);
-            }*/
         }
 
     }

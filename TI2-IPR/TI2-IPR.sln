@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TI2-IPR", "TI2-IPR\TI2-IPR.csproj", "{6239189B-2870-4CFD-AB79-961607688F6A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapApp", "MapApp\MapApp.csproj", "{F60B091E-CDB9-4E29-B941-4600433A0CD8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,24 @@ Global
 		{6239189B-2870-4CFD-AB79-961607688F6A}.Release|x86.ActiveCfg = Release|x86
 		{6239189B-2870-4CFD-AB79-961607688F6A}.Release|x86.Build.0 = Release|x86
 		{6239189B-2870-4CFD-AB79-961607688F6A}.Release|x86.Deploy.0 = Release|x86
+		{F60B091E-CDB9-4E29-B941-4600433A0CD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F60B091E-CDB9-4E29-B941-4600433A0CD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F60B091E-CDB9-4E29-B941-4600433A0CD8}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{F60B091E-CDB9-4E29-B941-4600433A0CD8}.Debug|ARM.ActiveCfg = Debug|ARM
+		{F60B091E-CDB9-4E29-B941-4600433A0CD8}.Debug|ARM.Build.0 = Debug|ARM
+		{F60B091E-CDB9-4E29-B941-4600433A0CD8}.Debug|ARM.Deploy.0 = Debug|ARM
+		{F60B091E-CDB9-4E29-B941-4600433A0CD8}.Debug|x86.ActiveCfg = Debug|x86
+		{F60B091E-CDB9-4E29-B941-4600433A0CD8}.Debug|x86.Build.0 = Debug|x86
+		{F60B091E-CDB9-4E29-B941-4600433A0CD8}.Debug|x86.Deploy.0 = Debug|x86
+		{F60B091E-CDB9-4E29-B941-4600433A0CD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F60B091E-CDB9-4E29-B941-4600433A0CD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F60B091E-CDB9-4E29-B941-4600433A0CD8}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{F60B091E-CDB9-4E29-B941-4600433A0CD8}.Release|ARM.ActiveCfg = Release|ARM
+		{F60B091E-CDB9-4E29-B941-4600433A0CD8}.Release|ARM.Build.0 = Release|ARM
+		{F60B091E-CDB9-4E29-B941-4600433A0CD8}.Release|ARM.Deploy.0 = Release|ARM
+		{F60B091E-CDB9-4E29-B941-4600433A0CD8}.Release|x86.ActiveCfg = Release|x86
+		{F60B091E-CDB9-4E29-B941-4600433A0CD8}.Release|x86.Build.0 = Release|x86
+		{F60B091E-CDB9-4E29-B941-4600433A0CD8}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
