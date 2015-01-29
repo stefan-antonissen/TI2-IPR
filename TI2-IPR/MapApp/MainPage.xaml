@@ -21,9 +21,9 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Maps:MapControl Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="2" Height="400" MapServiceToken="Zxf8UmCg_ux0pq1PSZd8GA" Name="map"/>
-        <ScrollViewer Name="SettingsScrollViewer" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3">
+        <ScrollViewer Name="SettingsScrollViewer" Height="200" Width="400" Grid.Column="0" Margin="0" Grid.Row="2" VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="3">
             <Viewbox>
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="0,0" Height="200" Width="400"    >
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="0,0" Height="1000" Width="400"    >
                     <CheckBox Margin="4,0" x:Name="Aerial_Checkbox" Checked="Aerial_Checked" Unchecked="Map_NoStyle" Content="Aerial view"/>
                     <CheckBox Margin="4,0" x:Name="AerialWithRoads_Checkbox" Checked="AerialWithRoads_Checked" Unchecked="Map_NoStyle" Content="Aerial with roads view"/>
                     <CheckBox Margin="4,0" x:Name="Traffic_Checkbox" Checked="Traffic_Checked" Unchecked="Traffic_Unchecked" Content="Traffic"/>

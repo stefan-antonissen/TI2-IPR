@@ -67,6 +67,7 @@ namespace MapApp
             _mapView = this;
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
+            setToCurrentLocation();
         }
 
         /// <summary>
@@ -85,6 +86,21 @@ namespace MapApp
             // this event is handled for you.
         }
 
+        private async void setToCurrentLocation()
+        {
+            var location = await getLocationAsync();
+            await map.TrySetViewAsync(location.Coordinate.Point, 18, 0, 0, MapAnimationKind.Linear);
+
+            _geo.PositionChanged += new TypedEventHandler<Geolocator, PositionChangedEventArgs>(geo_PositionChanged);
+        }
+
+        public static MainPage instance
+        {
+            get
+            {
+                return _mapView;
+            }
+        }
         private async void geo_PositionChanged(Geolocator sender, PositionChangedEventArgs e)
         {
             await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
